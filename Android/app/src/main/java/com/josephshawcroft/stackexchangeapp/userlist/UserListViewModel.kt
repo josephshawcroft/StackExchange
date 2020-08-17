@@ -34,8 +34,8 @@ internal class UserListViewModelImpl @ViewModelInject constructor(
             .observeOn(Schedulers.io())
             .subscribeOn(Schedulers.io())
             .subscribe(
-            { users -> usersLiveData.postValue(Response.IsLoading()) },
-            { error -> usersLiveData.postValue(Response.Error(error)) }
-        )
+                { users -> usersLiveData.postValue(Response.Success(users)) },
+                { error -> usersLiveData.postValue(Response.Error(error)) }
+            )
     }
 }

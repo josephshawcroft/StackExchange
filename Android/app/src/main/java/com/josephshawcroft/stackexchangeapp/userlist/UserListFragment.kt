@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.josephshawcroft.stackexchangeapp.BaseFragment
 import com.josephshawcroft.stackexchangeapp.data.Response
@@ -12,7 +13,7 @@ import com.josephshawcroft.stackexchangeapp.databinding.FragmentUserListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserListFragment : BaseFragment<FragmentUserListBinding>() {
+class UserListFragment : BaseFragment<FragmentUserListBinding>(), UserListAdapterListener {
 
     private lateinit var viewModel : UserListViewModel
 
@@ -28,7 +29,7 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>() {
         val binding = FragmentUserListBinding.inflate(inflater, container, false)
         setBinding(binding)
 
-        binding.userList.adapter = null
+        binding.userList.adapter = UserListAdapter(this)
 
         binding.searchButton.setOnClickListener {
             val searchText = binding.searchText.text.toString()
@@ -43,14 +44,28 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>() {
     private val onUserListUpdatedObserver = Observer<Response<List<User>>> { response ->
         when (response) {
             is Response.Success -> {
+                binding.searchButton.isEnabled = true
+                binding.searchText.isEnabled = true
+                binding.progressBar.visibility = View.INVISIBLE
 
+                (binding.userList.adapter as UserListAdapter).updateUserList(response.data)
             }
             is Response.Error -> {
+                binding.searchButton.isEnabled = true
+                binding.searchText.isEnabled = true
+                binding.progressBar.visibility = View.INVISIBLE
 
+                Toast.makeText(context, "Network error. Please try again later.", Toast.LENGTH_LONG).show()
             }
             is Response.IsLoading -> {
-
+                binding.searchButton.isEnabled = false
+                binding.searchText.isEnabled = false
+                binding.progressBar.visibility = View.VISIBLE
             }
         }
+    }
+
+    override fun onUserSelected(user: User) {
+        Toast.makeText(context, user.displayName, Toast.LENGTH_LONG).show()
     }
 }

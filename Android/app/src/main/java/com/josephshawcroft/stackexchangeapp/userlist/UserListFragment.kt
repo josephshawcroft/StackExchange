@@ -19,7 +19,6 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(), BackPressHandl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         viewModel = UserListViewModel.get(this)
     }
 

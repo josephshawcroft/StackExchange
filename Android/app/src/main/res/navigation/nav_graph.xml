@@ -8,4 +8,13 @@
         android:name="com.josephshawcroft.stackexchangeapp.userlist.UserListFragment"
         android:label="User List Fragment"
         tools:layout="@layout/fragment_user_list" />
+    <fragment
+        android:id="@+id/selectedUserFragment"
+        android:name="com.josephshawcroft.stackexchangeapp.selecteduser.SelectedUserFragment"
+        android:label="Selected User Fragment"
+        tools:layout="@layout/fragment_selected_user">
+        <argument
+            android:name="selectedUser"
+            app:argType="com.josephshawcroft.stackexchangeapp.data.model.User" />
+    </fragment>
 </navigation>

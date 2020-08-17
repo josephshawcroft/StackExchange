@@ -1,7 +1,7 @@
 package com.josephshawcroft.stackexchangeapp.userlist
 
 import androidx.lifecycle.*
-import com.josephshawcroft.stackexchangeapp.data.User
+import com.josephshawcroft.stackexchangeapp.data.model.User
 
 interface UserListViewModel {
 

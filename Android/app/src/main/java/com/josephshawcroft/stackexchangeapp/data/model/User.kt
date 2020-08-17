@@ -1,5 +1,9 @@
-package com.josephshawcroft.stackexchangeapp.data
+package com.josephshawcroft.stackexchangeapp.data.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class User(
     val account_id: Int,
     val badge_counts: BadgeCounts,
@@ -18,4 +22,4 @@ data class User(
     val reputation_change_year: Int,
     val user_id: Int,
     val user_type: String
-)
+) : Parcelable

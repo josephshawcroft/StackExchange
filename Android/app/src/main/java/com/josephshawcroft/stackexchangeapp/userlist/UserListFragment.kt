@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.josephshawcroft.stackexchangeapp.BaseFragment
-import com.josephshawcroft.stackexchangeapp.data.User
+import com.josephshawcroft.stackexchangeapp.data.model.User
 import com.josephshawcroft.stackexchangeapp.databinding.FragmentUserListBinding
 import com.josephshawcroft.stackexchangeapp.util.BackPressHandler
 import dagger.hilt.android.AndroidEntryPoint

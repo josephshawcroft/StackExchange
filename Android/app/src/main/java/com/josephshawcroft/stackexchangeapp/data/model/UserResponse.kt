@@ -1,6 +1,5 @@
 package com.josephshawcroft.stackexchangeapp.data.model
 
-
 import com.google.gson.annotations.SerializedName
 
 data class UserResponse(

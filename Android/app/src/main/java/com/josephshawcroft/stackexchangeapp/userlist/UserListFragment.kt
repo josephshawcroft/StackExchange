@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.josephshawcroft.stackexchangeapp.BaseFragment
 import com.josephshawcroft.stackexchangeapp.data.Response
 import com.josephshawcroft.stackexchangeapp.data.model.User
@@ -66,6 +67,7 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(), UserListAdapte
     }
 
     override fun onUserSelected(user: User) {
-        Toast.makeText(context, user.displayName, Toast.LENGTH_LONG).show()
+        val action = UserListFragmentDirections.actionUserListFragmentToSelectedUserFragment(user)
+        Navigation.findNavController(binding.root).navigate(action)
     }
 }

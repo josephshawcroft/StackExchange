@@ -33,8 +33,12 @@ class UserListAdapter(private val userAdapterListener: UserListAdapterListener) 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val user = users[position]
+
         holder.reputationText.text = user.reputation.toString()
         holder.displayName.text = user.displayName
+        holder.itemView.setOnClickListener {
+            userAdapterListener.onUserSelected(user)
+        }
     }
 
     class ViewHolder(binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {

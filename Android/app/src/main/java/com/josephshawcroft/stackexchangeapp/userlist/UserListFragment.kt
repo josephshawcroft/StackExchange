@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -33,13 +34,27 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(), UserListAdapte
         binding.userList.adapter = UserListAdapter(this)
 
         binding.searchButton.setOnClickListener {
-            val searchText = binding.searchText.text.toString()
-            viewModel.fetchUsersByName(searchText)
+            searchForUser()
+        }
+
+        binding.searchText.setOnEditorActionListener { _, actionId, _ ->
+            return@setOnEditorActionListener when (actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    searchForUser()
+                    true
+                }
+                else -> false
+            }
         }
 
         viewModel.users.observe(viewLifecycleOwner, onUserListUpdatedObserver)
 
         return binding.root
+    }
+
+    private fun searchForUser() {
+        val searchText = binding.searchText.text.toString()
+        viewModel.fetchUsersByName(searchText)
     }
 
     private val onUserListUpdatedObserver = Observer<Response<List<User>>> { response ->

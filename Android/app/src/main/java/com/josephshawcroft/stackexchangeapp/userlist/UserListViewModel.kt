@@ -1,5 +1,6 @@
 package com.josephshawcroft.stackexchangeapp.userlist
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.josephshawcroft.stackexchangeapp.data.model.User
 
@@ -7,12 +8,15 @@ interface UserListViewModel {
 
     val users: LiveData<List<User>>
 
-    companion object{
-        fun get(owner: ViewModelStoreOwner) : UserListViewModel = ViewModelProvider(owner).get(UserListViewModelImpl::class.java)
+    companion object {
+        fun get(owner: ViewModelStoreOwner): UserListViewModel =
+            ViewModelProvider(owner).get(UserListViewModelImpl::class.java)
     }
 }
 
-internal class UserListViewModelImpl : ViewModel(), UserListViewModel {
+internal class UserListViewModelImpl @ViewModelInject constructor(
+    private val repository: UserListRepository
+) : ViewModel(), UserListViewModel {
 
     override val users: LiveData<List<User>>
         get() = MutableLiveData() //TODO add users via repo

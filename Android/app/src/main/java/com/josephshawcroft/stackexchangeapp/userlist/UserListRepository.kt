@@ -1,7 +1,8 @@
 package com.josephshawcroft.stackexchangeapp.userlist
 
-import com.josephshawcroft.stackexchangeapp.data.model.User
+import retrofit2.Retrofit
+import javax.inject.Inject
 
-class UserListRepository {
+class UserListRepository @Inject constructor(private val retrofit: Retrofit) {
 
 }

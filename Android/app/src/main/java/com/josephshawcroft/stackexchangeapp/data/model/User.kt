@@ -1,25 +1,43 @@
 package com.josephshawcroft.stackexchangeapp.data.model
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class User(
-    val account_id: Int,
-    val badge_counts: BadgeCounts,
-    val creation_date: Int,
-    val display_name: String,
-    val is_employee: Boolean,
-    val last_access_date: Int,
-    val last_modified_date: Int,
+    @SerializedName("account_id")
+    val accountId: Int,
+    @SerializedName("badge_counts")
+    val badgeCounts: BadgeCounts,
+    @SerializedName("creation_date")
+    val creationDate: Int,
+    @SerializedName("display_name")
+    val displayName: String,
+    @SerializedName("is_employee")
+    val isEmployee: Boolean,
+    @SerializedName("last_access_date")
+    val lastAccessDate: Int,
+    @SerializedName("last_modified_date")
+    val lastModifiedDate: Int,
+    @SerializedName("link")
     val link: String,
-    val profile_image: String,
+    @SerializedName("profile_image")
+    val profileImage: String,
+    @SerializedName("reputation")
     val reputation: Int,
-    val reputation_change_day: Int,
-    val reputation_change_month: Int,
-    val reputation_change_quarter: Int,
-    val reputation_change_week: Int,
-    val reputation_change_year: Int,
-    val user_id: Int,
-    val user_type: String
+    @SerializedName("reputation_change_day")
+    val reputationChangeDay: Int,
+    @SerializedName("reputation_change_month")
+    val reputationChangeMonth: Int,
+    @SerializedName("reputation_change_quarter")
+    val reputationChangeQuarter: Int,
+    @SerializedName("reputation_change_week")
+    val reputationChangeWeek: Int,
+    @SerializedName("reputation_change_year")
+    val reputationChangeYear: Int,
+    @SerializedName("user_id")
+    val userId: Int,
+    @SerializedName("user_type")
+    val userType: String
 ) : Parcelable

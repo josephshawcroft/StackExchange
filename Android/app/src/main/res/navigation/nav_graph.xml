@@ -6,7 +6,7 @@
     <fragment
         android:id="@+id/userListFragment"
         android:name="com.josephshawcroft.stackexchangeapp.userlist.UserListFragment"
-        android:label="User List Fragment"
+        android:label="Stack Exchange Api Searcher"
         tools:layout="@layout/fragment_user_list" >
         <action
             android:id="@+id/action_userListFragment_to_selectedUserFragment"
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/selectedUserFragment"
         android:name="com.josephshawcroft.stackexchangeapp.selecteduser.SelectedUserFragment"
-        android:label="Selected User Fragment"
+        android:label="User"
         tools:layout="@layout/fragment_selected_user">
         <argument
             android:name="selectedUser"

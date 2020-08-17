@@ -9,6 +9,7 @@
         android:id="@+id/userProfilePic"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginHorizontal="64dp"
         app:layout_constraintBottom_toTopOf="@id/userInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -16,12 +17,14 @@
 
     <LinearLayout
         android:id="@+id/userInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/userProfilePic">
 
         <LinearLayout
@@ -35,6 +38,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/user_name" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/userNameAnswer"
@@ -55,10 +63,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/reputation" />
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
             <TextView
                 android:id="@+id/reputationAnswer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="end"
                 tools:text="123" />
         </LinearLayout>
 
@@ -73,6 +87,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/badges" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/badgesAnswer"
@@ -93,6 +112,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/location" />
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
             <TextView
                 android:id="@+id/locationAnswer"
                 android:layout_width="wrap_content"
@@ -112,6 +136,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/age" />
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
             <TextView
                 android:id="@+id/ageAnswer"
                 android:layout_width="wrap_content"
@@ -129,9 +158,15 @@
                 android:id="@+id/creationDateField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/location" />
+                android:text="@string/creation_date" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <TextView
+                android:textAlignment="viewEnd"
                 android:id="@+id/creationDateAnswer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

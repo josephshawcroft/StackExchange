@@ -38,6 +38,19 @@ class SelectedUserFragment : BaseFragment<FragmentSelectedUserBinding>() {
 
         imageLoader.execute(request)
 
+        binding.userNameAnswer.text = user?.displayName
+        binding.reputationAnswer.text = user?.reputation.toString()
+        binding.badgesAnswer.text = user?.badgeCounts.toString() // TODO add badges
+
+        binding.locationAnswer.text = if (user?.location.isNullOrEmpty()) {
+            getString(R.string.not_specified)
+        } else {
+            user?.location
+        }
+
+        binding.ageAnswer.text = "20 years" // todo calculate age of account
+        binding.creationDateAnswer.text = user?.creationDate.toString()
+
         return binding.root
     }
 }

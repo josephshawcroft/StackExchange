@@ -5,4 +5,7 @@
     <string name="badges">Badges:</string>
     <string name="location">Location:</string>
     <string name="age">Age:</string>
+    <string name="not_specified">Not Specified</string>
+    <string name="creation_date">Creation Date:</string>
+    <string name="enter_a_search_query">Enter a search query</string>
 </resources>

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.josephshawcroft.stackexchangeapp.BaseFragment
+import com.josephshawcroft.stackexchangeapp.data.Response
 import com.josephshawcroft.stackexchangeapp.data.model.User
 import com.josephshawcroft.stackexchangeapp.databinding.FragmentUserListBinding
 import com.josephshawcroft.stackexchangeapp.util.BackPressHandler
@@ -36,8 +37,21 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(), BackPressHandl
         return binding.root
     }
 
-    private val onUserListUpdatedObserver = Observer<List<User>> { users ->
-        // todo update adapter with new users here
+    private val onUserListUpdatedObserver = Observer<Response<List<User>>> { response ->
+        when (response) {
+            is Response.Success -> {
+
+            }
+            is Response.Error -> {
+
+            }
+            is Response.IsLoading -> {
+
+            }
+            is Response.NotLoaded -> {
+
+            }
+        }
     }
 
     override fun onBackPressed(parentActivity: Activity) {

@@ -1,5 +1,9 @@
 package com.josephshawcroft.stackexchangeapp.di
 
+import com.josephshawcroft.stackexchangeapp.network.ApiClient
+import com.josephshawcroft.stackexchangeapp.network.StackExchangeService
+import com.josephshawcroft.stackexchangeapp.userlist.IUserListRepository
+import com.josephshawcroft.stackexchangeapp.userlist.UserListRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,13 +22,22 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
+    fun provideStackExchangeService(): StackExchangeService {
         val retroBuilder: Retrofit.Builder = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-        retroBuilder.client(OkHttpClient())
+            .client(OkHttpClient())
 
-        return retroBuilder.build()
+        val retrofit = retroBuilder.build()
+        return retrofit.create(StackExchangeService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideApiClient(stackExchangeService: StackExchangeService): ApiClient = ApiClient(stackExchangeService)
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(apiClient: ApiClient) : IUserListRepository = UserListRepository(apiClient)
 }

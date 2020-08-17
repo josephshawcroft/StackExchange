@@ -1,11 +1,7 @@
 package com.josephshawcroft.stackexchangeapp.di
 
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
-import com.josephshawcroft.stackexchangeapp.data.model.User
 import com.josephshawcroft.stackexchangeapp.network.ApiClient
 import com.josephshawcroft.stackexchangeapp.network.StackExchangeService
-import com.josephshawcroft.stackexchangeapp.network.UserDeserializer
 import com.josephshawcroft.stackexchangeapp.userlist.IUserListRepository
 import com.josephshawcroft.stackexchangeapp.userlist.UserListRepository
 import dagger.Module

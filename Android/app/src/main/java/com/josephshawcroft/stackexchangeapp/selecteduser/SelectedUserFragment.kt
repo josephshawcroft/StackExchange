@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import coil.ImageLoader
 import coil.api.load
+import coil.request.LoadRequest
+import coil.request.LoadRequestBuilder
+import coil.transform.CircleCropTransformation
 import com.josephshawcroft.stackexchangeapp.BaseFragment
+import com.josephshawcroft.stackexchangeapp.R
 import com.josephshawcroft.stackexchangeapp.databinding.FragmentSelectedUserBinding
-import com.josephshawcroft.stackexchangeapp.databinding.FragmentUserListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,7 +29,14 @@ class SelectedUserFragment : BaseFragment<FragmentSelectedUserBinding>() {
             SelectedUserFragmentArgs.fromBundle(it).selectedUser
         }
 
-        binding.userProfilePic.load(user?.profileImage)
+        val imageLoader = ImageLoader(binding.root.context)
+        val request = LoadRequest.Builder(binding.root.context)
+            .data(user?.profileImage)
+            .target(binding.userProfilePic)
+            .error(R.drawable.ic_person_black_18dp)
+            .build()
+
+        imageLoader.execute(request)
 
         return binding.root
     }

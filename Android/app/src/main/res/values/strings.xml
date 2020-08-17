@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Stack Exchange App</string>
+    <string name="user_name">User Name:</string>
+    <string name="reputation">Reputation:</string>
+    <string name="badges">Badges:</string>
+    <string name="location">Location:</string>
+    <string name="age">Age:</string>
 </resources>

@@ -22,7 +22,7 @@ internal class UserListViewModelImpl @ViewModelInject constructor(
     private val repository: IUserListRepository
 ) : ViewModel(), UserListViewModel {
 
-    private val usersLiveData: MutableLiveData<Response<List<User>>> = MutableLiveData(Response.NotLoaded())
+    private val usersLiveData: MutableLiveData<Response<List<User>>> = MutableLiveData()
 
     override val users: LiveData<Response<List<User>>>
         get() = usersLiveData
@@ -34,8 +34,8 @@ internal class UserListViewModelImpl @ViewModelInject constructor(
             .observeOn(Schedulers.io())
             .subscribeOn(Schedulers.io())
             .subscribe(
-            { users -> usersLiveData.postValue(Response.Success(users)) },
+            { users -> usersLiveData.postValue(Response.IsLoading()) },
             { error -> usersLiveData.postValue(Response.Error(error)) }
-        ).dispose()
+        )
     }
 }

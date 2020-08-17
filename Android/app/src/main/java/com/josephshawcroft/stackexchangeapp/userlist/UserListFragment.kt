@@ -1,6 +1,5 @@
 package com.josephshawcroft.stackexchangeapp.userlist
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +9,10 @@ import com.josephshawcroft.stackexchangeapp.BaseFragment
 import com.josephshawcroft.stackexchangeapp.data.Response
 import com.josephshawcroft.stackexchangeapp.data.model.User
 import com.josephshawcroft.stackexchangeapp.databinding.FragmentUserListBinding
-import com.josephshawcroft.stackexchangeapp.util.BackPressHandler
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UserListFragment : BaseFragment<FragmentUserListBinding>(), BackPressHandler {
+class UserListFragment : BaseFragment<FragmentUserListBinding>() {
 
     private lateinit var viewModel : UserListViewModel
 
@@ -30,7 +28,12 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(), BackPressHandl
         val binding = FragmentUserListBinding.inflate(inflater, container, false)
         setBinding(binding)
 
-        binding.userList.adapter = null //TODO add adapter class
+        binding.userList.adapter = null
+
+        binding.searchButton.setOnClickListener {
+            val searchText = binding.searchText.text.toString()
+            viewModel.fetchUsersByName(searchText)
+        }
 
         viewModel.users.observe(viewLifecycleOwner, onUserListUpdatedObserver)
 
@@ -48,13 +51,6 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(), BackPressHandl
             is Response.IsLoading -> {
 
             }
-            is Response.NotLoaded -> {
-
-            }
         }
-    }
-
-    override fun onBackPressed(parentActivity: Activity) {
-        parentActivity.moveTaskToBack(true)
     }
 }

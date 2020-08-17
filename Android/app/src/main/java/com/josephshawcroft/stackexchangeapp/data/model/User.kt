@@ -1,11 +1,14 @@
 package com.josephshawcroft.stackexchangeapp.data.model
 
+
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class User(
+    @SerializedName("accept_rate")
+    val acceptRate: Int,
     @SerializedName("account_id")
     val accountId: Int,
     @SerializedName("badge_counts")
@@ -22,6 +25,8 @@ data class User(
     val lastModifiedDate: Int,
     @SerializedName("link")
     val link: String,
+    @SerializedName("location")
+    val location: String,
     @SerializedName("profile_image")
     val profileImage: String,
     @SerializedName("reputation")
@@ -39,5 +44,7 @@ data class User(
     @SerializedName("user_id")
     val userId: Int,
     @SerializedName("user_type")
-    val userType: String
+    val userType: String,
+    @SerializedName("website_url")
+    val websiteUrl: String
 ) : Parcelable

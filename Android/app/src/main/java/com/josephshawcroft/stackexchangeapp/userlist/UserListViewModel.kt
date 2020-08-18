@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.josephshawcroft.stackexchangeapp.data.Response
 import com.josephshawcroft.stackexchangeapp.data.model.User
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 interface UserListViewModel {
@@ -27,15 +28,22 @@ internal class UserListViewModelImpl @ViewModelInject constructor(
     override val users: LiveData<Response<List<User>>>
         get() = usersLiveData
 
+    private var disposable : Disposable? = null
+
     override fun fetchUsersByName(name: String) {
         usersLiveData.value = Response.IsLoading()
 
-        repository.fetchUsersByName(name)
+        disposable = repository.fetchUsersByName(name)
             .observeOn(Schedulers.io())
             .subscribeOn(Schedulers.io())
             .subscribe(
                 { users -> usersLiveData.postValue(Response.Success(users)) },
                 { error -> usersLiveData.postValue(Response.Error(error)) }
             )
+    }
+
+    override fun onCleared() {
+        disposable?.dispose()
+        super.onCleared()
     }
 }

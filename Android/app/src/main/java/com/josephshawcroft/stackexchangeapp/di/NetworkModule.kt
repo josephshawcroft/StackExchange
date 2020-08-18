@@ -1,8 +1,8 @@
 package com.josephshawcroft.stackexchangeapp.di
 
 import com.josephshawcroft.stackexchangeapp.network.ApiClient
-import com.josephshawcroft.stackexchangeapp.userlist.IUserListRepository
-import com.josephshawcroft.stackexchangeapp.userlist.UserListRepository
+import com.josephshawcroft.stackexchangeapp.repository.IUserRepository
+import com.josephshawcroft.stackexchangeapp.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,6 +34,8 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideUserRepository(apiClient: ApiClient): IUserListRepository =
-        UserListRepository(apiClient)
+    fun provideUserRepository(apiClient: ApiClient): IUserRepository =
+        UserRepository(
+            apiClient
+        )
 }

@@ -3,6 +3,10 @@ package com.josephshawcroft.stackexchangeapp.data.model
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+import org.joda.time.DateTime
+import org.joda.time.Days
+import org.joda.time.Instant
+import java.util.*
 
 @Parcelize
 data class User(
@@ -46,4 +50,19 @@ data class User(
     val userType: String,
     @SerializedName("website_url")
     val websiteUrl: String
-) : Parcelable
+) : Parcelable {
+
+    val ageOfAccountInDays : Int
+        get() {
+            val creationTime = DateTime(creationDate.toLong() * 1000L)
+            val currentTime = DateTime(Instant.now())
+
+            return Days.daysBetween(creationTime, currentTime).days
+        }
+
+    val formattedCreationDate : String
+        get() {
+            val creationTime = DateTime(creationDate.toLong() * 1000L)
+            return creationTime.toLocalDate().toString("dd-MM-yyyy", Locale.UK)
+        }
+}

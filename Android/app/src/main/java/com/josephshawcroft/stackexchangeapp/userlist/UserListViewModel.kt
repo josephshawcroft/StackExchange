@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.josephshawcroft.stackexchangeapp.data.Response
 import com.josephshawcroft.stackexchangeapp.data.model.User
+import com.josephshawcroft.stackexchangeapp.repository.IUserRepository
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -20,7 +21,7 @@ interface UserListViewModel {
 }
 
 internal class UserListViewModelImpl @ViewModelInject constructor(
-    private val repository: IUserListRepository
+    private val repository: IUserRepository
 ) : ViewModel(), UserListViewModel {
 
     private val usersLiveData: MutableLiveData<Response<List<User>>> = MutableLiveData()

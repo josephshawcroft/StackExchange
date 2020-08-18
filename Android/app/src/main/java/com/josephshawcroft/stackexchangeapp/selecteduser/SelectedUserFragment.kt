@@ -55,13 +55,7 @@ class SelectedUserFragment : BaseFragment<FragmentSelectedUserBinding>() {
         binding.badgesGold.text = String.format(getString(R.string.gold), user.badgeCounts.gold)
 
         binding.locationAnswer.text = user.location ?: getString(R.string.not_specified)
-
-        val creationTime = DateTime(user.creationDate.toLong() * 1000L)
-        val currentTime = DateTime(Instant.now())
-
-        val days = Days.daysBetween(creationTime, currentTime)
-        binding.ageAnswer.text = String.format(getString(R.string.days), days.days)
-        binding.creationDateAnswer.text =
-            creationTime.toLocalDate().toString("dd-MM-yyyy", Locale.UK)
+        binding.ageAnswer.text = String.format(getString(R.string.days), user.ageOfAccountInDays)
+        binding.creationDateAnswer.text = user.formattedCreationDate
     }
 }

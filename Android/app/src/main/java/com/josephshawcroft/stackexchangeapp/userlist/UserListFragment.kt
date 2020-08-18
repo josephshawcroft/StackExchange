@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.josephshawcroft.stackexchangeapp.BaseFragment
@@ -60,22 +59,25 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(), UserListAdapte
             is Response.Success -> {
                 binding.searchButton.isEnabled = true
                 binding.searchText.isEnabled = true
+                binding.userList.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.INVISIBLE
+                binding.errorText.visibility = View.INVISIBLE
 
                 (binding.userList.adapter as UserListAdapter).updateUserList(response.data)
             }
             is Response.Error -> {
                 binding.searchButton.isEnabled = true
                 binding.searchText.isEnabled = true
+                binding.userList.visibility = View.INVISIBLE
                 binding.progressBar.visibility = View.INVISIBLE
-
-                Toast.makeText(context, "Network error. Please try again later.", Toast.LENGTH_LONG)
-                    .show()
+                binding.errorText.visibility = View.VISIBLE
             }
             is Response.IsLoading -> {
                 binding.searchButton.isEnabled = false
                 binding.searchText.isEnabled = false
+                binding.userList.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.VISIBLE
+                binding.errorText.visibility = View.INVISIBLE
             }
         }
     }

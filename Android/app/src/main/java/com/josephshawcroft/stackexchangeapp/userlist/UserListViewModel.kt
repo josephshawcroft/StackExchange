@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.josephshawcroft.stackexchangeapp.data.Response
 import com.josephshawcroft.stackexchangeapp.data.model.User
 import com.josephshawcroft.stackexchangeapp.repository.IUserRepository
+import com.josephshawcroft.stackexchangeapp.utils.CountingIdlingResourceSingleton
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
@@ -29,17 +30,25 @@ internal class UserListViewModelImpl @ViewModelInject constructor(
     override val users: LiveData<Response<List<User>>>
         get() = usersLiveData
 
-    private var disposable : Disposable? = null
+    private var disposable: Disposable? = null
 
     override fun fetchUsersByName(name: String) {
         usersLiveData.value = Response.IsLoading()
+
+        CountingIdlingResourceSingleton.increment() // for testing
 
         disposable = repository.fetchUsersByName(name)
             .observeOn(Schedulers.io())
             .subscribeOn(Schedulers.io())
             .subscribe(
-                { users -> usersLiveData.postValue(Response.Success(users)) },
-                { error -> usersLiveData.postValue(Response.Error(error)) }
+                { users ->
+                    usersLiveData.postValue(Response.Success(users))
+                    CountingIdlingResourceSingleton.decrement()
+                },
+                { error ->
+                    usersLiveData.postValue(Response.Error(error))
+                    CountingIdlingResourceSingleton.decrement()
+                }
             )
     }
 

@@ -1,6 +1,5 @@
 package com.josephshawcroft.stackexchangeapp.data.model
 
-
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
@@ -26,7 +25,7 @@ data class User(
     @SerializedName("link")
     val link: String,
     @SerializedName("location")
-    val location: String,
+    val location: String?,
     @SerializedName("profile_image")
     val profileImage: String,
     @SerializedName("reputation")

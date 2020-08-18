@@ -5,14 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import coil.ImageLoader
-import coil.api.load
 import coil.request.LoadRequest
-import coil.request.LoadRequestBuilder
-import coil.transform.CircleCropTransformation
 import com.josephshawcroft.stackexchangeapp.BaseFragment
 import com.josephshawcroft.stackexchangeapp.R
+import com.josephshawcroft.stackexchangeapp.data.model.User
 import com.josephshawcroft.stackexchangeapp.databinding.FragmentSelectedUserBinding
 import dagger.hilt.android.AndroidEntryPoint
+import org.joda.time.DateTime
+import org.joda.time.Days
+import org.joda.time.Instant
+import java.util.*
 
 @AndroidEntryPoint
 class SelectedUserFragment : BaseFragment<FragmentSelectedUserBinding>() {
@@ -29,28 +31,37 @@ class SelectedUserFragment : BaseFragment<FragmentSelectedUserBinding>() {
             SelectedUserFragmentArgs.fromBundle(it).selectedUser
         }
 
+        user?.let { displayUserInfo(it) }
+
+        return binding.root
+    }
+
+    private fun displayUserInfo(user: User) {
+
         val imageLoader = ImageLoader(binding.root.context)
         val request = LoadRequest.Builder(binding.root.context)
-            .data(user?.profileImage)
+            .data(user.profileImage)
             .target(binding.userProfilePic)
             .error(R.drawable.ic_person_black_18dp)
             .build()
 
         imageLoader.execute(request)
 
-        binding.userNameAnswer.text = user?.displayName
-        binding.reputationAnswer.text = user?.reputation.toString()
-        binding.badgesAnswer.text = user?.badgeCounts.toString() // TODO add badges
+        binding.userNameAnswer.text = user.displayName
+        binding.reputationAnswer.text = user.reputation.toString()
 
-        binding.locationAnswer.text = if (user?.location.isNullOrEmpty()) {
-            getString(R.string.not_specified)
-        } else {
-            user?.location
-        }
+        binding.badgesBronze.text = String.format(getString(R.string.bronze), user.badgeCounts.bronze)
+        binding.badgesSilver.text = String.format(getString(R.string.silver), user.badgeCounts.silver)
+        binding.badgesGold.text = String.format(getString(R.string.gold), user.badgeCounts.gold)
 
-        binding.ageAnswer.text = "20 years" // todo calculate age of account
-        binding.creationDateAnswer.text = user?.creationDate.toString()
+        binding.locationAnswer.text = user.location ?: getString(R.string.not_specified)
 
-        return binding.root
+        val creationTime = DateTime(user.creationDate.toLong() * 1000L)
+        val currentTime = DateTime(Instant.now())
+
+        val days = Days.daysBetween(creationTime, currentTime)
+        binding.ageAnswer.text = String.format(getString(R.string.days), days.days)
+        binding.creationDateAnswer.text =
+            creationTime.toLocalDate().toString("dd-MM-yyyy", Locale.UK)
     }
 }

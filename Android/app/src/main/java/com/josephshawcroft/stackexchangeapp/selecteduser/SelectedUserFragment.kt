@@ -51,7 +51,13 @@ class SelectedUserFragment : BaseFragment<FragmentSelectedUserBinding>() {
         binding.badgesGold.text = String.format(getString(R.string.gold), user.badgeCounts.gold)
 
         binding.locationAnswer.text = user.location ?: getString(R.string.not_specified)
-        binding.ageAnswer.text = String.format(binding.root.context.resources.getQuantityString(R.plurals.days, user.ageOfAccountInDays), user.ageOfAccountInDays)
+
+        val daysString = binding.root.context.resources.getQuantityString(
+            R.plurals.days,
+            user.ageOfAccountInDays
+        )
+
+        binding.ageAnswer.text = String.format(daysString, user.ageOfAccountInDays)
         binding.creationDateAnswer.text = user.formattedCreationDate
     }
 }

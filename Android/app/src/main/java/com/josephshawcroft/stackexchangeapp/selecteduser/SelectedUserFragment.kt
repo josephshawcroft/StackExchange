@@ -11,10 +11,6 @@ import com.josephshawcroft.stackexchangeapp.R
 import com.josephshawcroft.stackexchangeapp.data.model.User
 import com.josephshawcroft.stackexchangeapp.databinding.FragmentSelectedUserBinding
 import dagger.hilt.android.AndroidEntryPoint
-import org.joda.time.DateTime
-import org.joda.time.Days
-import org.joda.time.Instant
-import java.util.*
 
 @AndroidEntryPoint
 class SelectedUserFragment : BaseFragment<FragmentSelectedUserBinding>() {

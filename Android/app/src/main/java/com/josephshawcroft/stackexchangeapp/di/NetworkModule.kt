@@ -1,8 +1,7 @@
 package com.josephshawcroft.stackexchangeapp.di
 
+import com.josephshawcroft.stackexchangeapp.BuildConfig
 import com.josephshawcroft.stackexchangeapp.network.ApiClient
-import com.josephshawcroft.stackexchangeapp.repository.IUserRepository
-import com.josephshawcroft.stackexchangeapp.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +10,6 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-import com.josephshawcroft.stackexchangeapp.BuildConfig
 
 @Module
 @InstallIn(ApplicationComponent::class)
@@ -31,11 +29,4 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideApiClient(retrofit: Retrofit): ApiClient = ApiClient(retrofit)
-
-    @Provides
-    @Singleton
-    fun provideUserRepository(apiClient: ApiClient): IUserRepository =
-        UserRepository(
-            apiClient
-        )
 }

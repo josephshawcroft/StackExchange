@@ -70,7 +70,7 @@ class UserFragmentsTest {
     }
 
 
-    //not too bothered about the result of this, it's more to make sure emojis don't break the app more than anything
+    //this test is to make sure emojis don't break the app more than anything
     @Test
     fun emojiTest() {
         onView(withId(R.id.searchText)).perform(clearText(), replaceText("\"\uD83D\uDE00\"\n"))

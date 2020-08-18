@@ -11,6 +11,7 @@ interface StackExchangeService {
         @Query("order") order: String = "asc",
         @Query("sort") sort: String = "name",
         @Query("inname") name: String,
-        @Query("site") site: String = "stackoverflow"
+        @Query("site") site: String = "stackoverflow",
+        @Query("pagesize") pageSize: Int = 20
     ): Single<UserResponse>
 }

@@ -12,5 +12,8 @@
     <string name="bronze">Bronze: %d</string>
     <string name="silver">Silver: %d</string>
     <string name="gold">Gold: %d</string>
-    <string name="days">%d days old</string>
+    <plurals name="days">
+        <item quantity="one">%d day old</item>
+        <item quantity="other">%d days old</item>
+    </plurals>
 </resources>

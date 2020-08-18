@@ -1,7 +1,6 @@
 package com.josephshawcroft.stackexchangeapp.userlist
 
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class UserListFragment : BaseFragment<FragmentUserListBinding>(), UserListAdapterListener {
 
-    private lateinit var viewModel : UserListViewModel
+    private lateinit var viewModel: UserListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +33,7 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(), UserListAdapte
 
         binding.userList.adapter = UserListAdapter(this)
 
-        binding.searchButton.setOnClickListener {
-            searchForUser()
-        }
+        binding.searchButton.setOnClickListener { searchForUser() }
 
         binding.searchText.setOnEditorActionListener { _, actionId, _ ->
             return@setOnEditorActionListener when (actionId) {
@@ -72,7 +69,8 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>(), UserListAdapte
                 binding.searchText.isEnabled = true
                 binding.progressBar.visibility = View.INVISIBLE
 
-                Toast.makeText(context, "Network error. Please try again later.", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Network error. Please try again later.", Toast.LENGTH_LONG)
+                    .show()
             }
             is Response.IsLoading -> {
                 binding.searchButton.isEnabled = false
